@@ -1,0 +1,17 @@
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <h2>Índice</h2>
+  </div>
+  <div class="sidebar-content">
+    <h3>Tableros</h3>
+    <ul>
+      @for (tablero of tableros; track tablero.id) {
+        <li [class.active]="idTableroActual === tablero.id"
+            (click)="seleccionarTablero(tablero.id)">
+          <span class="board-icon">📋</span>
+          {{ tablero.nombre }}
+        </li>
+      }
+    </ul>
+  </div>
+</aside>

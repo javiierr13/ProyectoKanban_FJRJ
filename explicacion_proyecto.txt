@@ -1,0 +1,29 @@
+Carpeta: src/app (Raíz de la lógica de la aplicación)
+- app.component.html: Estructura HTML principal que organiza la barra de navegación, el menú lateral y el área donde se cargan las páginas.
+- app.component.scss: Estilos globales aplicados al contenedor principal de la aplicación.
+- app.component.ts: Clase principal que arranca la aplicación y declara los componentes base necesarios.
+- app.config.ts: Archivo de configuración técnica de Angular (configuración del router y otros proveedores).
+- app.routes.ts: Definición de todas las direcciones (rutas) de la web, como la vista de tablero o la de usuarios.
+
+Carpeta: src/app/components (Contiene los elementos visuales de la interfaz)
+- barra-navegacion:
+  * barra-navegacion.component.html/ts/scss: Implementa la cabecera superior. Permite cambiar de tablero y abrir el modal para crear nuevos tableros.
+- columna:
+  * columna.component.html/ts/scss: Gestiona una columna individual del Kanban. Controla el listado de tareas y la lógica para recibir tareas arrastradas (Drag & Drop).
+- formulario-tarea:
+  * formulario-tarea.component.html/ts/scss: Formulario para dar de alta nuevas tareas, permitiendo elegir título, descripción, horas y usuario asignado.
+- gestion-usuarios:
+  * gestion-usuarios.component.html/ts/scss: Pantalla para administrar usuarios. Permite registrarlos validando que el ID y el Email no se repitan.
+- menu-lateral:
+  * menu-lateral.component.html/ts/scss: Menú de la izquierda que sirve como índice para navegar rápidamente entre los tableros creados.
+- tablero:
+  * tablero.component.html/ts/scss: Vista principal del Kanban. Muestra el conjunto de columnas y gestiona la apertura de los formularios de creación.
+- tarjeta-tarea:
+  * tarjeta-tarea.component.html/ts/scss: Pequeño recuadro que representa una tarea. Muestra el título y la estimación, y permite moverla entre columnas.
+
+Carpeta: src/app/models (Define la forma de los datos)
+- kanban.model.ts: Archivo central donde se definen qué campos tienen un Usuario, una Tarea, una Columna y un Tablero.
+
+Carpeta: src/app/services (Contiene la lógica de funcionamiento y datos)
+- tablero.service.ts: Cerebro de la aplicación que guarda los tableros y gestiona el movimiento de las tareas entre columnas.
+- usuario.service.ts: Gestiona la lista de usuarios del sistema y se encarga de las comprobaciones de seguridad (como evitar emails duplicados).

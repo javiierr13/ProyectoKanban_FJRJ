@@ -1,0 +1,41 @@
+<div class="board-wrapper" 
+     [style.backgroundColor]="tablero?.colorFondo">
+  <div class="board-overlay"></div>
+  
+  <div class="board-header">
+    <div class="header-info">
+      <h1>{{ tablero?.nombre }}</h1>
+      <p class="board-desc">{{ tablero?.descripcion }}</p>
+    </div>
+    <div class="header-actions">
+      <button class="add-task-btn-global" (click)="abrirFormularioTarea()">+ Nueva Tarea</button>
+      @if (tablero && tablero.columnas.length < 5) {
+        <button class="add-column-btn" (click)="alternarAnadirColumna()">+ Añadir Columna</button>
+      }
+    </div>
+  </div>
+
+  @if (mostrarFormularioTarea) {
+    <app-formulario-tarea (cerrada)="cerrarFormularioTarea()" (creada)="alCrearTarea($event)"></app-formulario-tarea>
+  }
+
+  <div class="columns-container">
+    @for (columna of tablero?.columnas; track columna.id) {
+      <app-columna 
+        [columna]="columna" 
+        [idTablero]="tablero!.id"
+        (anadirTareaSolicitada)="abrirFormularioTarea($event)">
+      </app-columna>
+    }
+
+    @if (mostrarAnadirColumna) {
+      <div class="add-column-form">
+        <input type="text" [(ngModel)]="nombreNuevaColumna" placeholder="Nombre de la columna" (keyup.enter)="anadirColumna()">
+        <div class="actions">
+          <button class="btn-save" (click)="anadirColumna()">Añadir</button>
+          <button class="btn-cancel" (click)="alternarAnadirColumna()">X</button>
+        </div>
+      </div>
+    }
+  </div>
+</div>

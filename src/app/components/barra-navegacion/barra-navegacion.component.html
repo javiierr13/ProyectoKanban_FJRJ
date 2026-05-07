@@ -1,0 +1,47 @@
+<nav class="navbar">
+  <div class="navbar-brand">
+    <div class="logo-box"></div>
+    <span class="logo">kanban</span>
+  </div>
+  <div class="navbar-links">
+    <div class="dropdown">
+      <button class="dropbtn" (click)="alternarDesplegable()">
+        Tableros
+        <span class="chevron" [class.open]="desplegableAbierto">▾</span>
+      </button>
+      <div class="dropdown-content" [class.show]="desplegableAbierto">
+        @for (tablero of tableros; track tablero.id) {
+        <a (click)="establecerTableroActual(tablero.id)">{{ tablero.nombre }}</a>
+        }
+        <hr>
+        <a (click)="abrirModalNuevoTablero()">+ Nuevo Tablero</a>
+      </div>
+    </div>
+    <a routerLink="/usuarios" routerLinkActive="active">Usuarios</a>
+    <a routerLink="/tablero" routerLinkActive="active">Tablero Actual</a>
+  </div>
+</nav>
+
+@if (mostrarModalNuevoTablero) {
+<div class="modal">
+  <div class="modal-content">
+    <h2>Crear Nuevo Tablero</h2>
+    <div class="form-group">
+      <label>Nombre:</label>
+      <input type="text" [(ngModel)]="nombreNuevoTablero" placeholder="Nombre del tablero">
+    </div>
+    <div class="form-group">
+      <label>Descripción:</label>
+      <textarea [(ngModel)]="descripcionNuevoTablero" placeholder="Descripción del proyecto"></textarea>
+    </div>
+    <div class="form-group">
+      <label>Color de Fondo:</label>
+      <input type="color" [(ngModel)]="colorNuevoTablero">
+    </div>
+    <div class="modal-actions">
+      <button class="btn-cancel" (click)="cerrarModalNuevoTablero()">Cancelar</button>
+      <button class="btn-save" (click)="crearTablero()">Crear</button>
+    </div>
+  </div>
+</div>
+}

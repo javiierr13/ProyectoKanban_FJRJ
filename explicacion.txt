@@ -1,0 +1,30 @@
+# Explicación del Proyecto Kanban Pro
+
+## 1. Estructura del Proyecto
+El proyecto ha sido desarrollado utilizando Angular con una arquitectura de componentes independientes (Standalone Components). La lógica se divide en:
+- **Componentes**: Controlan la interfaz de usuario.
+- **Servicios**: Gestionan los datos y la lógica de negocio (CRUD, Drag & Drop).
+- **Modelos**: Definen las estructuras de datos (Tablero, Columna, Tarea, Usuario).
+
+## 2. Funcionamiento de los Tableros
+- Al iniciar la aplicación, se carga un tablero por defecto.
+- En el menú superior (**Tableros**), puedes crear nuevos tableros especificando su nombre, descripción y un color de fondo personalizado.
+- Cada tablero se inicializa automáticamente con tres columnas: "Por hacer", "En proceso" y "Realizado".
+- Puedes añadir hasta un máximo de 5 columnas por tablero.
+
+## 3. Gestión de Tareas y Drag & Drop
+- Las tareas se crean mediante un formulario que solicita título, descripción, horas y un usuario asignado.
+- Por defecto, las tareas aparecen en la primera columna.
+- **Drag & Drop**: Para mover una tarea, simplemente arrástrala de una columna a otra. El sistema detecta automáticamente el origen y el destino para actualizar el estado. Se utiliza el evento `preventDefault` para permitir que las columnas reciban los elementos.
+
+## 4. Gestión de Usuarios (CRUD)
+- Existe una sección dedicada a la gestión de usuarios accesible desde la cabecera.
+- Al añadir un usuario, el sistema verifica que el **ID** y el **Email** no estén duplicados.
+- Se utiliza la funcionalidad `event.preventDefault()` en el formulario para validar los datos antes de proceder con la creación.
+
+## 5. Diseño y Animaciones
+- La interfaz utiliza técnicas modernas de **Glassmorphism** (efectos de desenfoque y transparencia).
+- Se han incluido micro-animaciones en los menús desplegables y transiciones suaves para mejorar la experiencia de usuario.
+- Las columnas cambian de estilo visualmente cuando tienes una tarea "sobrevolando" para indicarte dónde puedes soltarla.
+
+---

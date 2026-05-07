@@ -1,0 +1,19 @@
+<div class="task-card" 
+     draggable="true" 
+     (dragstart)="alEmpezarArrastre($event)" 
+     (dragend)="alTerminarArrastre($event)">
+  
+  <div class="task-title">{{ tarea.titulo }}</div>
+  <div class="task-desc">{{ tarea.descripcion }}</div>
+  
+  <div class="task-footer">
+    <div class="task-info">
+      <span class="icon">⏱️</span> {{ tarea.estimacionHoras }}h
+    </div>
+    @if (usuarioAsignado) {
+      <div class="task-user" [title]="usuarioAsignado.nombre + ' ' + usuarioAsignado.apellidos">
+        {{ usuarioAsignado.nombre.charAt(0) }}{{ usuarioAsignado.apellidos.charAt(0) }}
+      </div>
+    }
+  </div>
+</div>

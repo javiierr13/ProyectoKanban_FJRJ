@@ -1,0 +1,21 @@
+<div class="column"
+     (dragover)="alArrastrarSobre($event)"
+     (dragleave)="alSalirDeArrastre($event)"
+     (drop)="alSoltar($event)">
+  
+  <div class="column-header">
+    <h3>{{ columna.nombre }}</h3>
+    <span class="count">{{ columna.tareas.length }}</span>
+  </div>
+
+  <div class="tasks-list">
+    @for (tarea of columna.tareas; track tarea.id) {
+      <app-tarjeta-tarea 
+        [tarea]="tarea" 
+        [idColumna]="columna.id">
+      </app-tarjeta-tarea>
+    }
+  </div>
+
+  <button class="add-task-btn" (click)="abrirFormularioTarea()">+ Añadir tarea</button>
+</div>

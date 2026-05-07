@@ -1,0 +1,61 @@
+<div class="user-crud-container">
+  <div class="user-form-card">
+    <h2>Gestión de Usuarios</h2>
+    
+    @if (mensajeError) {
+      <div class="error-banner">
+        {{ mensajeError }}
+      </div>
+    }
+
+    <form (submit)="alEnviar($event)">
+      <div class="form-grid">
+        <div class="form-group">
+          <label>ID Usuario</label>
+          <input type="text" [(ngModel)]="id" name="id" required placeholder="Ej: 12345">
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" [(ngModel)]="email" name="email" required placeholder="user@example.com">
+        </div>
+        <div class="form-group">
+          <label>Nombre</label>
+          <input type="text" [(ngModel)]="nombre" name="nombre" required>
+        </div>
+        <div class="form-group">
+          <label>Apellidos</label>
+          <input type="text" [(ngModel)]="apellidos" name="apellidos" required>
+        </div>
+      </div>
+      <button type="submit" class="btn-submit">Añadir Usuario</button>
+    </form>
+  </div>
+
+  <div class="users-list-card">
+    <h3>Usuarios Registrados</h3>
+    <div class="table-responsive">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre Completo</th>
+            <th>Email</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (usuario of usuarios; track usuario.id) {
+            <tr>
+              <td>{{ usuario.id }}</td>
+              <td>{{ usuario.nombre }} {{ usuario.apellidos }}</td>
+              <td>{{ usuario.email }}</td>
+              <td>
+                <button class="btn-delete" (click)="eliminarUsuario(usuario.id)">Eliminar</button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
