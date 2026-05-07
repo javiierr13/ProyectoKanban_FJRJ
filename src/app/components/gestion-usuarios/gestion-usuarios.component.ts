@@ -13,7 +13,7 @@ import { UsuarioService } from '../../services/usuario.service';
 })
 export class GestionUsuariosComponent implements OnInit {
   usuarios: Usuario[] = [];
-  
+
   // Campos del formulario
   id = '';
   nombre = '';
@@ -21,8 +21,9 @@ export class GestionUsuariosComponent implements OnInit {
   email = '';
 
   mensajeError = '';
+  editando = false;
 
-  constructor(private usuarioService: UsuarioService) {}
+  constructor(private usuarioService: UsuarioService) { }
 
   ngOnInit(): void {
     this.usuarios = this.usuarioService.obtenerUsuarios();
@@ -32,24 +33,38 @@ export class GestionUsuariosComponent implements OnInit {
     evento.preventDefault();
     this.mensajeError = '';
 
-    // Requisito 9: Validación usando preventDefault
-    if (this.usuarioService.existeId(this.id)) {
-      this.mensajeError = `Error: El ID '${this.id}' ya está registrado.`;
-      evento.preventDefault();
-      return;
-    }
+    if (this.editando) {
+      // Si estamos editando, actualizamos el usuario
+      const usuarioActualizado = new Usuario(this.id, this.nombre, this.apellidos, this.email);
+      this.usuarioService.actualizarUsuario(usuarioActualizado);
+      this.limpiarFormulario();
+      this.usuarios = this.usuarioService.obtenerUsuarios();
+    } else {
+      if (this.usuarioService.existeId(this.id)) {
+        this.mensajeError = `Error: El ID '${this.id}' ya está registrado.`;
+        return;
+      }
 
-    if (this.usuarioService.existeEmail(this.email)) {
-      this.mensajeError = `Error: El Email '${this.email}' ya está registrado.`;
-      evento.preventDefault();
-      return;
-    }
+      if (this.usuarioService.existeEmail(this.email)) {
+        this.mensajeError = `Error: El Email '${this.email}' ya está registrado.`;
+        return;
+      }
 
-    // Si es válido, añadir usuario
-    const nuevoUsuario = new Usuario(this.id, this.nombre, this.apellidos, this.email);
-    this.usuarioService.anadirUsuario(nuevoUsuario);
-    this.limpiarFormulario();
-    this.usuarios = this.usuarioService.obtenerUsuarios();
+      // Si es válido, añadir usuario
+      const nuevoUsuario = new Usuario(this.id, this.nombre, this.apellidos, this.email);
+      this.usuarioService.anadirUsuario(nuevoUsuario);
+      this.limpiarFormulario();
+      this.usuarios = this.usuarioService.obtenerUsuarios();
+    }
+  }
+
+  cargarUsuarioParaEditar(usuario: Usuario): void {
+    this.id = usuario.id;
+    this.nombre = usuario.nombre;
+    this.apellidos = usuario.apellidos;
+    this.email = usuario.email;
+    this.editando = true;
+    this.mensajeError = '';
   }
 
   eliminarUsuario(id: string): void {
@@ -65,5 +80,6 @@ export class GestionUsuariosComponent implements OnInit {
     this.apellidos = '';
     this.email = '';
     this.mensajeError = '';
+    this.editando = false;
   }
 }

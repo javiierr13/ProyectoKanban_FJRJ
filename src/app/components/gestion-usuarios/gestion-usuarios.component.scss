@@ -82,24 +82,53 @@
         border-color: var(--border-focus);
         box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.05);
       }
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        background: #1a1a1a;
+      }
     }
   }
 
-  .btn-submit {
-    width: 100%;
-    padding: 14px;
-    border-radius: 8px;
-    border: none;
-    background: #fff;
-    color: #000;
-    font-weight: 700;
-    font-size: 0.95rem;
-    cursor: pointer;
-    transition: all 0.2s;
+  .form-actions {
+    display: flex;
+    gap: 1rem;
 
-    &:hover {
-      background: #e5e5e5;
-      transform: translateY(-1px);
+    .btn-submit {
+      flex: 2;
+      padding: 14px;
+      border-radius: 8px;
+      border: none;
+      background: #fff;
+      color: #000;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.2s;
+
+      &:hover {
+        background: #e5e5e5;
+        transform: translateY(-1px);
+      }
+    }
+
+    .btn-cancel {
+      flex: 1;
+      padding: 14px;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      background: transparent;
+      color: var(--text-secondary);
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.2s;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.05);
+        color: var(--text-primary);
+      }
     }
   }
 
@@ -137,6 +166,29 @@
 
     tr:last-child td {
       border-bottom: none;
+    }
+
+    .actions-cell {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .btn-edit {
+      background: transparent;
+      border: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.8rem;
+      font-weight: 600;
+      transition: all 0.2s;
+
+      &:hover {
+        background: rgba(59, 130, 246, 0.1);
+        color: #3b82f6;
+        border-color: rgba(59, 130, 246, 0.2);
+      }
     }
 
     .btn-delete {
